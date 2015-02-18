@@ -1,0 +1,8 @@
+How to setup the run environment
+
+Requires:
+
+- Python 2.7
+
+% sudo pip install pyOpenSSL
+% mkdir root
