@@ -1,4 +1,4 @@
-Simple RESTful server implemented by Python. Store data in filesystem. Support HTTP digest authentication. Support HTTPS. Good for personal and home home use.
+Simple RESTful server implemented by Python. Store data in filesystem. Support HTTP digest authentication. Support HTTPS. Good for personal and home use.
 
 # Highlights
 
@@ -40,7 +40,9 @@ How the secrets are stored?  Take FileSystem(fs.py) for example:
 the .htpasswd contains the username and password of "4d-5e-1f-43":
 
 > 4d-5e-1f-43:plain_text_password_1
+> 
 > 4d-5e-1f-57:plain_text_password_2
+> 
 > 4d-5e-1f-6f:plain_text_password_3
 
 There may be a /scalers/4d-5e-1f-43/.htpasswd file. If there is, it contains
@@ -51,12 +53,8 @@ the special accounts for that directory.
 
 Examples:
 
-1. Empty /.htpasswd
-   No access to root
-
-2. No /.htppasswd
-   root is free to access
-
+1. Empty /.htpasswd: No access to root
+2. No /.htppasswd: root is free to access
 3. (more...)
 
 # Howto Run Server and Client
@@ -64,27 +62,42 @@ Examples:
 > Run in console A:
 > 
 >   % vi params.py
+> 
 >   % make setup
+> 
 >   % python httpd.py
 > 
 > Run in console B:
+> 
 >   % curl -i -H "Accept: application/json" -X PUT -d "content=ThisIsATest" "http://localhost:8888/test-file"
+> 
 >   HTTP/1.0 201 Created
+> 
 >   Server: SimpleHTTP/0.6 Python/2.7.3
+> 
 >   Date: Wed, 18 Feb 2015 04:07:35 GMT
+> 
 >   Content-type: application/json
 >   
+> 
 >   {"content": "PUT: file /test is created.", "last_modified": 1424232455.0}
 > 
 >   % cat root/test-file
+> 
 >   ThisIsATest
 > 
 >   % curl -i "http://localhost:8888/test-file"
+> 
 >   HTTP/1.0 200 OK
+> 
 >   Server: SimpleHTTP/0.6 Python/2.7.3
+> 
 >   Date: Wed, 18 Feb 2015 04:15:09 GMT
+> 
 >   Content-type: text/html
+> 
 >   Last-Modified: Wed, 18 Feb 2015 04:10:57 GMT
+> 
 > 
 >   ThisIsATest
 
