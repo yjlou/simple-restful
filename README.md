@@ -1,4 +1,4 @@
-Simple RESTful server implemented by Python. Store data in filesystem. Support HTTP digest authentication. Support HTTPS.
+Simple RESTful server implemented by Python. Store data in filesystem. Support HTTP digest authentication. Support HTTPS. Good for personal and home home use.
 
 # Highlights
 
@@ -62,6 +62,9 @@ Examples:
 # Howto Run Server and Client
 
 > Run in console A:
+> 
+>   % vi params.py
+>   % make setup
 >   % python httpd.py
 > 
 > Run in console B:
