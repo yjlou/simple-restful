@@ -34,6 +34,12 @@ class Composer():
           link = "%s%s" % (path, entry["name"])
           ret = ret + "<LI><A HREF='%s'>%s</A>" % (link, name)
         ret = ret + "</UL></BODY></HTML>"
-      else:
+        content_type = 'text/html'
+      # TODO: Use magic lib to tell the MIME type.
+      elif content.startswith('\xff\xd8\xff\xe0\x00\x10\x4a\x46\x49\x46'):
+        content_type = 'image/jpeg'
         ret = content
-      return ("text/html", ret)
+      else:
+        content_type = 'text/html'
+        ret = content
+      return (content_type, ret)
