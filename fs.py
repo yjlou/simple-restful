@@ -25,7 +25,7 @@ class FileSystem(db.Db):
 
   def get_dir(self, path):
     path = "%s/%s" % (self.root, self.safe_path(path))
-    items = os.listdir(path)
+    items = sorted(os.listdir(path))
     ret = []
     for i in items:
       if i[0] == ".":
