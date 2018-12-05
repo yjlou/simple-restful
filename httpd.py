@@ -45,8 +45,13 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
     return ret;
 
   def output_auth_headers(self, status_code, headers):
+    if DEBUG >=5 :
+      print('STATUS_CODE={}'.format(status_code))
     self.send_response(status_code)
+
     for (key, value) in headers:
+      if DEBUG >=5 :
+        print('HEADER: {}={}'.format(key, value))
       self.send_header(key, value)
     self.end_headers()
 
@@ -119,12 +124,18 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
     # Parse POST, PUT, UPDATE, DELETE data
     content_type = self.headers.getheader('content-type')
     if content_type:
+      if DEBUG >= 5:
+        print('content_type={}'.format(content_type))
       ctype, pdict = cgi.parse_header(content_type)
       if ctype == 'multipart/form-data':
+        if DEBUG >= 5:
+          print('multipart/form-data')
         postvars = cgi.parse_multipart(self.rfile, pdict)
       elif ctype == 'application/x-www-form-urlencoded':
         length = int(self.headers.getheader('content-length'))
         postvars = cgi.parse_qs(self.rfile.read(length), keep_blank_values = 1)
+        if DEBUG >= 5:
+          print('application/x-www-form-urlencoded.length={}'.format(length))
       else:
         postvars = {}
     else:
