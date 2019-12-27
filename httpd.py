@@ -194,6 +194,7 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
 
     self.send_response(status_code)
     self.send_header("Content-type", content_type)
+    self.send_header("Access-Control-Allow-Origin", "*")  # for CORS
     if last_modified is not None:
       self.send_header("Last-Modified",
           time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime(last_modified)))
