@@ -13,9 +13,9 @@ class Composer():
   def compose(self, content, path):
     if self.output_format == "JSON":
       if type(content) is ListType:  # directory list, DIR
-        return ("application/json", json.dumps(content))
+        return ("application/json; charset=UTF-8", json.dumps(content))
       else:
-        return ("application/json", json.dumps({
+        return ("application/json; charset=UTF-8", json.dumps({
           "content": content,
           "last_modified": self.db.get_last_modified(path.split("/")),
         }))
@@ -38,6 +38,12 @@ class Composer():
       # TODO: Use magic lib to tell the MIME type.
       elif content.startswith('\xff\xd8\xff\xe0\x00\x10\x4a\x46\x49\x46'):
         content_type = 'image/jpeg'
+        ret = content
+      elif content.startswith('\x00\x00\x00\x20\x66\x74\x79\x70\x69'):
+        content_type = 'video/mp4'
+        ret = content
+      elif content.startswith('\x52\x49\x46\x46'):
+        content_type = 'video/avi'
         ret = content
       else:
         content_type = 'text/html'
