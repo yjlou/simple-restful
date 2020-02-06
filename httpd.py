@@ -105,6 +105,16 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
 
   def handle_request(self, http_method):
 
+    # Short-cut for OPTIONS method
+    if http_method is 'OPTIONS':
+      allow = 'GET, PUT, UPDATE, DELETE, OPTIONS'
+      self.send_response(200)
+      self.send_header('Access-Control-Allow-Origin', '*')  # for CORS
+      self.send_header('Access-Control-Allow-Methods', allow)
+      self.send_header('Allow', allow)
+      self.end_headers()
+      return
+
     db = fs.FileSystem(params.HTTP_ROOT)
     r = rest.Rest(db)
 
@@ -215,6 +225,9 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
 
   def do_DELETE(self):
     self.handle_request("DELETE")
+
+  def do_OPTIONS(self):
+    self.handle_request("OPTIONS")
 
 
 class SecureHTTPServer(BaseHTTPServer.HTTPServer):
