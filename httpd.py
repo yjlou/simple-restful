@@ -110,6 +110,7 @@ class HttpHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
       allow = 'GET, PUT, UPDATE, DELETE, OPTIONS'
       self.send_response(200)
       self.send_header('Access-Control-Allow-Origin', '*')  # for CORS
+      self.send_header('Access-Control-Allow-Headers', '*')  # for CORS
       self.send_header('Access-Control-Allow-Methods', allow)
       self.send_header('Allow', allow)
       self.end_headers()
