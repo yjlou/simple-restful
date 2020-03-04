@@ -45,6 +45,9 @@ class Composer():
       elif content.startswith('\x52\x49\x46\x46'):
         content_type = 'video/avi'
         ret = content
+      elif path.endswith('.css'):
+        content_type = 'text/css'
+        ret = content
       else:
         content_type = 'text/html'
         ret = content
