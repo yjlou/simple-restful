@@ -1,3 +1,4 @@
 *.pyc
 *.sw*
 root
+server.pem
