@@ -113,9 +113,9 @@ class FileSystem(db.Db):
   def open_htpasswd(self, path):
     htpasswd = self.htpasswd_filename(path)
     if os.path.isfile(htpasswd):
-      return open(htpasswd, "r")
+      return htpasswd
     else:
-      return open("/dev/null", "r")
+      return "/dev/null"
 
   def need_authentication(self, path):
     pathes = self.safe_path(path.split("/")).split("/")
@@ -148,7 +148,7 @@ class FileSystem(db.Db):
         if DEBUG >= 5: print "not self.has_htpasswd()"
         continue
 
-      with self.open_htpasswd(path) as fp:
+      with open(self.open_htpasswd(path), "r") as fp:
         for line in fp:
           entries = line.rstrip().split(":")
           user = entries[0]
