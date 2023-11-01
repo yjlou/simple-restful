@@ -7,6 +7,7 @@ import cgi
 import composer
 import digestauth
 import fs
+import gc
 import json
 import params
 import rest
@@ -313,6 +314,12 @@ def main():
 
   threading.Thread(target = run_http).start()
   threading.Thread(target = run_https).start()
+
+  while True:
+    print("Garbage collecting: START ...")
+    gc.collect()
+    print("Garbage collecting: DONE.")
+    time.sleep(60)
 
 if __name__ == '__main__':
   main()
