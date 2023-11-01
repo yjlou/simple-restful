@@ -48,6 +48,9 @@ class Composer():
       elif content.startswith('\x89\x50\x4e\x47\x0d\x0a'):
         content_type = 'image/png'
         ret = content
+      elif path.endswith('.mp4'):
+        content_type = 'video/mp4'
+        ret = content
       elif path.endswith('.txt'):
         content_type = 'text/plain'
         ret = content
@@ -56,6 +59,9 @@ class Composer():
         ret = content
       elif path.endswith('.pdf'):
         content_type = 'application/x-pdf'
+        ret = content
+      elif path.endswith('.nes'):
+        content_type = 'application/octet-stream'
         ret = content
       else:
         content_type = 'text/html'
