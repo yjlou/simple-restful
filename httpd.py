@@ -249,7 +249,7 @@ class SecureHTTPServer(BaseHTTPServer.HTTPServer):
   """
   def __init__(self, server_address, HandlerClass):
     BaseServer.__init__(self, server_address, HandlerClass)
-    ctx = SSL.Context(SSL.SSLv23_METHOD)
+    ctx = SSL.Context(SSL.TLS_METHOD)
     #server.pem's location (containing the server private key and
     #the server certificate).
     fpem = 'server.pem'
